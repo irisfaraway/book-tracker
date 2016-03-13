@@ -18,8 +18,16 @@
         <td><%= book.title %></td>
         <td><%= book.author %></td>
         <td><%= book.start.to_formatted_s(:dmy) %></td>
-        <td><%= book.end.to_formatted_s(:dmy) %></td>
-        <td><%= book.rating %></td>
+        <td><% if book.end.nil? %>
+              -
+            <% else %>
+              <%= book.end.to_formatted_s(:dmy) %>
+            <% end %></td>
+        <td><% if book.rating.nil? %>
+              -
+            <% else %>
+              <%= book.rating %>
+            <%end %></td>
         <td><%= link_to 'Show', book %></td>
         <td><%= link_to 'Edit', edit_book_path(book) %></td>
         <td><%= link_to 'Destroy', book, method: :delete, data: { confirm: 'Are you sure?' } %></td>
