@@ -5,6 +5,13 @@ class BooksController < ApplicationController
   # GET /books.json
   def index
     @books = Book.all.order('end IS NOT NULL, end DESC, start DESC')
+    # Book stats for dashboard
+    @finished_this_year = @books.where('end >= ?', Date.today.beginning_of_year).count
+    @days_per_book = Date.today.yday/@finished_this_year
+    @books_per_year = 365/@days_per_book
+    @in_progress = @books.where('end IS NULL').count
+    @average_this_year = @books.where('end >= ?', Date.today.beginning_of_year).average('rating')
+    @average_overall = @books.average('rating')
   end
 
   # GET /books/1

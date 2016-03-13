@@ -1,41 +1,71 @@
-<h1>Listing Books</h1>
+<div class="row">
+  <div class="small-12 columns">
+    <h1>Book tracker</h1>
+  </div>
+</div>
+<div class="row">
+  <div class="small-12 medium-12 large-6 columns">
+      <h2>This year</h2>
+      <p>You've finished <%= @finished_this_year %> books in <%= Date.today.year %>.</p>
+      <p>It took you <%= Date.today.yday %> days, or one book every <%= @days_per_book %> days. At this rate, you'll read <%= @books_per_year %> books this year.</p>
+      <p><% if @in_progress > 1 %>
+          You're reading <%= @in_progress %> books right now &mdash; better finish some up!
+        <% elsif @in_progress < 1 %>
+          You aren't reading anything right now. Go start something!
+        <% else %>
+          You're reading <%= @in_progress %> book right now.
+      <% end %></p>
+      <p>Average book rating: <%= @average_this_year %></p>
+  </div>
+  <div class="small-12 medium-12 large-6 columns">
+    <div class="panel">
+      <h2>Overall</h2>
+      <p>You've started reading <%= @books.count %> books and finished <%= @books.count('end') %> of them.</p>
+      <p>Average book rating: <%= @average_overall %></p>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="small-12 columns">
+    <table>
+      <thead>
+        <tr>
+          <th>Title</th>
+          <th>Author</th>
+          <th>Start</th>
+          <th>End</th>
+          <th>Rating</th>
+          <th colspan="3"></th>
+        </tr>
+      </thead>
 
-<table>
-  <thead>
-    <tr>
-      <th>Title</th>
-      <th>Author</th>
-      <th>Start</th>
-      <th>End</th>
-      <th>Rating</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @books.each do |book| %>
-      <tr>
-        <td><%= book.title %></td>
-        <td><%= book.author %></td>
-        <td><%= book.start.to_formatted_s(:dmy) %></td>
-        <td><% if book.end.nil? %>
-              -
-            <% else %>
-              <%= book.end.to_formatted_s(:dmy) %>
-            <% end %></td>
-        <td><% if book.rating.nil? %>
-              -
-            <% else %>
-              <%= book.rating %>
-            <%end %></td>
-        <td><%= link_to 'Show', book %></td>
-        <td><%= link_to 'Edit', edit_book_path(book) %></td>
-        <td><%= link_to 'Destroy', book, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<%= link_to 'New Book', new_book_path %>
+      <tbody>
+        <% @books.each do |book| %>
+          <tr>
+            <td><%= book.title %></td>
+            <td><%= book.author %></td>
+            <td><%= book.start.to_formatted_s(:dmy) %></td>
+            <td><% if book.end.nil? %>
+                  -
+                <% else %>
+                  <%= book.end.to_formatted_s(:dmy) %>
+                <% end %></td>
+            <td><% if book.rating.nil? %>
+                  -
+                <% else %>
+                  <%= book.rating %>
+                <%end %></td>
+            <td><%= link_to 'Show', book %></td>
+            <td><%= link_to 'Edit', edit_book_path(book) %></td>
+            <td><%= link_to 'Destroy', book, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
+<div class="row">
+  <div class="small-12 columns">
+    <%= link_to 'New Book', new_book_path, class: 'button' %>
+  </div>
+</div>
