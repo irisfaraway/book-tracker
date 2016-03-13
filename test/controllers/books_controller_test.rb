@@ -21,7 +21,7 @@ class BooksControllerTest < ActionController::TestCase
       post :create, book: { author: @book.author, end: @book.end, rating: @book.rating, start: @book.start, title: @book.title }
     end
 
-    assert_redirected_to book_path(assigns(:book))
+    assert_redirected_to books_path
   end
 
   test "should show book" do
@@ -36,7 +36,7 @@ class BooksControllerTest < ActionController::TestCase
 
   test "should update book" do
     patch :update, id: @book, book: { author: @book.author, end: @book.end, rating: @book.rating, start: @book.start, title: @book.title }
-    assert_redirected_to book_path(assigns(:book))
+    assert_redirected_to books_path
   end
 
   test "should destroy book" do
