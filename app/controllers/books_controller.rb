@@ -4,13 +4,17 @@ class BooksController < ApplicationController
   # GET /books
   # GET /books.json
   def index
-    @books = Book.all.order('end IS NOT NULL, end DESC, start DESC')
+    @books = Book.all.order('end_date IS NOT NULL, end_date DESC, start_date DESC')
     # Book stats for dashboard
-    @finished_this_year = @books.where('end >= ?', Date.today.beginning_of_year).count
-    @days_per_book = Date.today.yday/@finished_this_year
-    @books_per_year = 365/@days_per_book
-    @in_progress = @books.where('end IS NULL').count
-    @average_this_year = @books.where('end >= ?', Date.today.beginning_of_year).average('rating')
+    @finished_this_year = @books.where('end_date > ?', Date.today.beginning_of_year).count
+    if @finished_this_year.nonzero?
+      @days_per_book = Date.today.yday/@finished_this_year
+      @books_per_year = 365/@days_per_book
+    else
+      @days_per_book = 0
+    end
+    @in_progress = @books.where('end_date IS NULL').count
+    @average_this_year = @books.where('end_date >= ?', Date.today.beginning_of_year).average('rating')
     @average_overall = @books.average('rating')
   end
 
@@ -76,6 +80,6 @@ class BooksController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def book_params
-      params.require(:book).permit(:title, :author, :start, :end, :rating)
+      params.require(:book).permit(:title, :author, :start_date, :end_date, :rating)
     end
 end

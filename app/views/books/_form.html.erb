@@ -21,12 +21,12 @@
       <%= f.text_field :author %>
     </div>
     <div class="field">
-      <%= f.label :start %>(required)<br>
-      <%= f.date_select :start %>
+      <%= f.label :start_date %>(required)<br>
+      <%= f.date_select :start_date %>
     </div>
     <div class="field">
-      <%= f.label :end %><br>
-      <%= f.date_select :end, {:include_blank => true, :default => nil} %>
+      <%= f.label :end_date %><br>
+      <%= f.date_select :end_date, {:include_blank => true, :default => nil} %>
     </div>
     <div class="field">
       <%= f.label :rating %><br>

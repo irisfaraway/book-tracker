@@ -6,8 +6,12 @@
 <div class="row">
   <div class="small-12 medium-12 large-6 columns">
       <h2>This year</h2>
-      <p>You've finished <%= @finished_this_year %> books in <%= Date.today.year %>.</p>
-      <p>It took you <%= Date.today.yday %> days, or one book every <%= @days_per_book %> days. At this rate, you'll read <%= @books_per_year %> books this year.</p>
+      <% if @finished_this_year == 0 %>
+        <p>You haven't finished anything yet this year.</p>
+      <% else %>
+        <p>You've finished <%= @finished_this_year %> books in <%= Date.today.year %>.</p>
+        <p>It took you <%= Date.today.yday %> days, or one book every <%= @days_per_book %> days. At this rate, you'll read <%= @books_per_year %> books this year.</p>
+      <% end %>
       <p><% if @in_progress > 1 %>
           You're reading <%= @in_progress %> books right now &mdash; better finish some up!
         <% elsif @in_progress < 1 %>
@@ -20,7 +24,7 @@
   <div class="small-12 medium-12 large-6 columns">
     <div class="panel">
       <h2>Overall</h2>
-      <p>You've started reading <%= @books.count %> books and finished <%= @books.count('end') %> of them.</p>
+      <p>You've started reading <%= @books.count %> books and finished <%= @books.count('end_date') %> of them.</p>
       <p>Average book rating: <%= @average_overall %></p>
     </div>
   </div>
@@ -44,11 +48,11 @@
           <tr>
             <td><%= book.title %></td>
             <td><%= book.author %></td>
-            <td><%= book.start.to_formatted_s(:dmy) %></td>
-            <td><% if book.end.nil? %>
+            <td><%= book.start_date.to_formatted_s(:dmy) %></td>
+            <td><% if book.end_date.nil? %>
                   -
                 <% else %>
-                  <%= book.end.to_formatted_s(:dmy) %>
+                  <%= book.end_date.to_formatted_s(:dmy) %>
                 <% end %></td>
             <td><% if book.rating.nil? %>
                   -

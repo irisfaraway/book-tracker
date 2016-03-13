@@ -26,6 +26,9 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 # Validate dates
 gem 'date_validator'
 
+# Use Postgres
+gem 'pg'
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
@@ -40,9 +43,6 @@ group :development do
 
   # Set up layouts
   gem 'rails_layout'
-
-  # Use sqlite3 as the database for Active Record
-  gem 'sqlite3'
 end
 
 group :test do
@@ -51,6 +51,5 @@ group :test do
 end
 
 group :production do
-  gem 'pg'
   gem 'rails_12factor'
 end
