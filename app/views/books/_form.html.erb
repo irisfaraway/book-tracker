@@ -11,27 +11,29 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :title %><br>
-    <%= f.text_field :title %>
-  </div>
-  <div class="field">
-    <%= f.label :author %><br>
-    <%= f.text_field :author %>
-  </div>
-  <div class="field">
-    <%= f.label :start %><br>
-    <%= f.date_select :start %>
-  </div>
-  <div class="field">
-    <%= f.label :end %><br>
-    <%= f.date_select :end %>
-  </div>
-  <div class="field">
-    <%= f.label :rating %><br>
-    <%= f.number_field :rating %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
+  <div class="small-12 medium-10 large-8">
+    <div class="field">
+      <%= f.label :title %>(required)<br>
+      <%= f.text_field :title %>
+    </div>
+    <div class="field">
+      <%= f.label :author %>(required)<br>
+      <%= f.text_field :author %>
+    </div>
+    <div class="field">
+      <%= f.label :start %>(required)<br>
+      <%= f.date_select :start %>
+    </div>
+    <div class="field">
+      <%= f.label :end %><br>
+      <%= f.date_select :end, {:include_blank => true, :default => nil} %>
+    </div>
+    <div class="field">
+      <%= f.label :rating %><br>
+      <%= f.number_field :rating %>
+    </div>
+    <div class="actions">
+      <%= f.submit %>
+    </div>
   </div>
 <% end %>
