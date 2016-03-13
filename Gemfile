@@ -3,8 +3,6 @@ ruby '2.3.0'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.6'
-# Use sqlite3 as the database for Active Record
-gem 'sqlite3'
 # Use Foundation framework for prettiness
 gem 'foundation-rails', '~> 5.5'
 # Use SCSS for stylesheets
@@ -42,9 +40,17 @@ group :development do
 
   # Set up layouts
   gem 'rails_layout'
+
+  # Use sqlite3 as the database for Active Record
+  gem 'sqlite3'
 end
 
 group :test do
   gem 'minitest-spec-rails'
   gem 'minitest-rails-capybara'
+end
+
+group :production do
+  gem 'pg'
+  gem 'rails_12factor'
 end
