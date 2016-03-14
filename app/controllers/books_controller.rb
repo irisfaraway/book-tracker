@@ -8,7 +8,9 @@ class BooksController < ApplicationController
     # Book stats for dashboard
     @finished_this_year = @books.where('end_date > ?', Date.today.beginning_of_year).count
     if @finished_this_year.nonzero?
+      # Gets number of current day in entire year, divides it by number of books with end dates this year
       @days_per_book = Date.today.yday / @finished_this_year
+      # TODO: get actual number of days in year to avoid dodgy leap year stats
       @books_per_year = 365 / @days_per_book
     else
       @days_per_book = 0
