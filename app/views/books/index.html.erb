@@ -19,13 +19,17 @@
         <% else %>
           You're reading <%= @in_progress %> book right now.
       <% end %></p>
-      <p>Average book rating: <%= @average_this_year %></p>
+      <% unless @average_this_year.nil? %>
+        <p>Average book rating: <%= @average_this_year %>/5</p>
+      <% end %>
   </div>
   <div class="small-12 medium-12 large-6 columns">
     <div class="panel">
       <h2>Overall</h2>
       <p>You've started reading <%= @books.count %> books and finished <%= @books.count('end_date') %> of them.</p>
-      <p>Average book rating: <%= @average_overall %></p>
+      <% unless @average_overall.nil? %>
+        <p>Average book rating: <%= @average_overall %>/5</p>
+      <% end %>
     </div>
   </div>
 </div>
@@ -57,7 +61,7 @@
             <td><% if book.rating.nil? %>
                   -
                 <% else %>
-                  <%= book.rating %>
+                  <%= book.rating %>/5
                 <%end %></td>
             <td><%= link_to 'Show', book %></td>
             <td><%= link_to 'Edit', edit_book_path(book) %></td>

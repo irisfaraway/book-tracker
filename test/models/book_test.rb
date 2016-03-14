@@ -12,8 +12,8 @@ describe Book do
   let(:book_params) { {
     title: 'My Brilliant Friend',
     author: 'Elena Ferrante',
-    start: '2015-01-01',
-    end: '2016-01-01',
+    start_date: '2015-01-01',
+    end_date: '2016-01-01',
     rating: '5'
   } }
   let(:book) { Book.new book_params }
@@ -35,7 +35,7 @@ describe Book do
   end
 
   it 'is invalid without a start date' do
-    book_params.delete :start
+    book_params.delete :start_date
     book.wont_be :valid?
     book.errors[:start].must_be :present?
   end

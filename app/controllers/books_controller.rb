@@ -8,8 +8,8 @@ class BooksController < ApplicationController
     # Book stats for dashboard
     @finished_this_year = @books.where('end_date > ?', Date.today.beginning_of_year).count
     if @finished_this_year.nonzero?
-      @days_per_book = Date.today.yday/@finished_this_year
-      @books_per_year = 365/@days_per_book
+      @days_per_book = Date.today.yday / @finished_this_year
+      @books_per_year = 365 / @days_per_book
     else
       @days_per_book = 0
     end
