@@ -1,6 +1,18 @@
-<h1>Editing User</h1>
+<div class="row">
+  <div class="small-12 columns">
+    <h1>Editing User</h1>
+  </div>
+</div>
 
-<%= render 'form' %>
+<div class="row">
+  <div class="small-12 columns">
+    <%= render 'form' %>
+  </div>
+</div>
 
-<%= link_to 'Show', @user %> |
-<%= link_to 'Back', users_path %>
+<div class="row">
+  <div class="small-12 columns">
+    <%= link_to 'Show', @user, class: 'button' %> 
+    <%= link_to 'Back', users_path, class: 'button' %>
+  </div>
+</div>

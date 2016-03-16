@@ -1,5 +1,9 @@
 class UsersController < ApplicationController
+  # Must be logged in to see or modify users
+  before_action :logged_in_user
   before_action :set_user, only: [:show, :edit, :update, :destroy]
+  # Only admins can see the full list of users edit and destroy users
+  before_action :admin_user, only: [:index, :edit, :update, :destroy]
 
   # GET /users
   # GET /users.json
@@ -19,6 +23,7 @@ class UsersController < ApplicationController
 
   # GET /users/1/edit
   def edit
+  #  @user = User.find(params[:id])
   end
 
   # POST /users
@@ -65,10 +70,35 @@ class UsersController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_user
       @user = User.find(params[:id])
+      redirect_to(root_url) unless @user == current_user
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
       params.fetch(:user, {})
+      params.require(:user).permit(:provider,
+                                    :uid,
+                                    :name,
+                                    :token,
+                                    :expires_at)
+    end
+
+    # Confirms the user is logged in
+    def logged_in_user
+      unless logged_in?
+        flash[:warning] = "You need to log in to do this"
+        redirect_to root_path
+      end
+    end
+
+    # Confirms the correct user
+    #def correct_user
+    #  @user = User.find(params[:id])
+    #  redirect_to(root_url) unless @user == current_user
+    #end
+
+    # Confirms the user is an admin
+    def admin_user
+      redirect_to(root_url) unless current_user.admin?
     end
 end

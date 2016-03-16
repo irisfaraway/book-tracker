@@ -1,8 +1,10 @@
 <%# add navigation links to this file %>
 <% if logged_in? %>
   <li><%= link_to 'Books', books_path %></li>
-  <li><%= link_to 'Users', users_path %></li>
-  <li><%= link_to 'Profile', current_user %></li>
+  <li><%= link_to 'My profile', current_user %></li>
+  <% if current_user.admin? %>
+    <li><%= link_to 'Manage users', users_path %></li>
+    <% end %>
   <li><%= link_to 'Log out', logout_path %></li>
   <% else %>
   <li><a href="/auth/facebook">Log in</a></li>
