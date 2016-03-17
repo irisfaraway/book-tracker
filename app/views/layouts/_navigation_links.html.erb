@@ -1,7 +1,6 @@
 <%# add navigation links to this file %>
 <% if logged_in? %>
-  <li><%= link_to 'Books', books_path %></li>
-  <li><%= link_to 'My profile', current_user %></li>
+  <li><%= link_to 'My books', books_path %></li>
   <% if current_user.admin? %>
     <li><%= link_to 'Manage users', users_path %></li>
     <% end %>

@@ -1,0 +1,25 @@
+<div class="row">
+  <div class="small-12 columns">
+    <h1>Book tracker</h1>
+  </div>
+</div>
+<% # Log-in prompt for the un-logged-in %>
+<% unless logged_in? %>
+  <div class="row">
+    <div class="small-12 columns">
+      <p>To use the book tracker, you need to log in or create an account.</p>
+      <p>The book tracker uses your Facebook account to connect. I promise not to do anything nefarious with it.</p>
+      <a href="/auth/facebook" class="button">Log in or sign up</a>
+    </div>
+  </div>
+<% end %>
+<% # Site data for logged-in users %>
+<% if logged_in? %>
+  <div class="row">
+    <div class="small-12 columns">
+      <p>Hi <%= current_user.name %>!</p>
+      <%= link_to 'See my books', books_path, class: 'button' %> 
+      <%= link_to 'Add a book', new_book_path, class: 'button' %>
+    </div>
+  </div>
+<% end %>
