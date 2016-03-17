@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
   # Must be logged in to do anything user-related
   before_action :logged_in_user
-  # Only admins can see edit and destroy users
+  # Only admins can edit and destroy users
   before_action :admin_user, only: [:edit, :update, :destroy]
 
   # GET /users
@@ -86,13 +86,16 @@ class UsersController < ApplicationController
     # Confirms the user is logged in
     def logged_in_user
       unless logged_in?
-        flash[:warning] = "You need to log in to do this"
-        redirect_to root_path
+        flash[:notice] = "You need to log in first"
+        redirect_to(root_url)
       end
     end
 
     # Confirms the user is an admin
     def admin_user
-      redirect_to(root_url) unless current_user.admin?
+      unless current_user.admin?
+        flash[:warning] = "Only admins can do that!"
+        redirect_to(root_url)
+      end
     end
 end
