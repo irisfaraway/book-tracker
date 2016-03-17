@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
   # Must be logged in to do anything user-related
   before_action :logged_in_user
-  # Only admins can see edit and destroy users
+  # Only admins can edit and destroy users
   before_action :admin_user, only: [:edit, :update, :destroy]
 
   # GET /users

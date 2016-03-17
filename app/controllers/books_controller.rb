@@ -4,7 +4,7 @@ class BooksController < ApplicationController
   # GET /books
   # GET /books.json
   def index
-    @books = Book.all.order('end_date IS NOT NULL, end_date DESC, start_date DESC')
+    @books = Book.where(user_id: current_user.id).order('end_date IS NOT NULL, end_date DESC, start_date DESC')
     # Book stats for dashboard
     @finished_this_year = @books.where('end_date > ?', Date.today.beginning_of_year).count
     if @finished_this_year.nonzero?
@@ -38,7 +38,7 @@ class BooksController < ApplicationController
   # POST /books.json
   def create
     @book = Book.new(book_params)
-
+    @book.user_id = current_user.id
     respond_to do |format|
       if @book.save
         format.html { redirect_to books_url, notice: 'Book was successfully created.' }
@@ -78,10 +78,15 @@ class BooksController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_book
       @book = Book.find(params[:id])
+      redirect_to root_path unless @book.user.id == current_user.id
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def book_params
-      params.require(:book).permit(:title, :author, :start_date, :end_date, :rating)
+      params.require(:book).permit(:title,
+                                    :author,
+                                    :start_date,
+                                    :end_date,
+                                    :rating)
     end
 end

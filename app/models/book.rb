@@ -1,6 +1,8 @@
 class Book < ActiveRecord::Base
   include ActiveModel::Validations
 
+  belongs_to :user
+
   # Require a title, author and start date
   validates :title, :author, :start_date, presence: true
 
