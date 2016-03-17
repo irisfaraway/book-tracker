@@ -1,27 +1,34 @@
-<p>
-  <strong>Title:</strong>
-  <%= @book.title %>
-</p>
+<div class="row">
+  <div class="small-12 columns">
+    <p>
+      <strong>Title:</strong>
+      <%= @book.title %>
+    </p>
 
-<p>
-  <strong>Author:</strong>
-  <%= @book.author %>
-</p>
+    <p>
+      <strong>Author:</strong>
+      <%= @book.author %>
+    </p>
 
-<p>
-  <strong>Start:</strong>
-  <%= @book.start_date %>
-</p>
+    <p>
+      <strong>Start:</strong>
+      <%= @book.start_date %>
+    </p>
 
-<p>
-  <strong>End:</strong>
-  <%= @book.end_date %>
-</p>
+    <p>
+      <strong>End:</strong>
+      <%= @book.end_date %>
+    </p>
 
-<p>
-  <strong>Rating:</strong>
-  <%= @book.rating %>
-</p>
-
-<%= link_to 'Edit', edit_book_path(@book) %> |
-<%= link_to 'Back', books_path %>
+    <p>
+      <strong>Rating:</strong>
+      <%= @book.rating %>
+    </p>
+  </div>
+</div>
+<div class="row">
+  <div class="small-12 columns">
+    <%= link_to 'Edit book', edit_book_path(@book), class: 'button radius info' %>
+    <%= link_to 'Back to all my books', books_path, class: 'button radius info' %>
+  </div>
+</div>
