@@ -1,9 +1,8 @@
 class UsersController < ApplicationController
-  # Must be logged in to see or modify users
+  # Must be logged in to do anything user-related
   before_action :logged_in_user
-  before_action :set_user, only: [:show, :edit, :update, :destroy]
-  # Only admins can see the full list of users edit and destroy users
-  before_action :admin_user, only: [:index, :edit, :update, :destroy]
+  # Only admins can see edit and destroy users
+  before_action :admin_user, only: [:edit, :update, :destroy]
 
   # GET /users
   # GET /users.json
@@ -14,6 +13,7 @@ class UsersController < ApplicationController
   # GET /users/1
   # GET /users/1.json
   def show
+    @user = User.find(params[:id])
   end
 
   # GET /users/new
@@ -23,7 +23,7 @@ class UsersController < ApplicationController
 
   # GET /users/1/edit
   def edit
-  #  @user = User.find(params[:id])
+    @user = User.find(params[:id])
   end
 
   # POST /users
@@ -90,12 +90,6 @@ class UsersController < ApplicationController
         redirect_to root_path
       end
     end
-
-    # Confirms the correct user
-    #def correct_user
-    #  @user = User.find(params[:id])
-    #  redirect_to(root_url) unless @user == current_user
-    #end
 
     # Confirms the user is an admin
     def admin_user
