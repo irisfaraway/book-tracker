@@ -18,8 +18,8 @@ class BooksController < ApplicationController
         @days_per_book = 0
       end
       @in_progress = @books.where('end_date IS NULL').count
-      @average_this_year = @books.where('end_date >= ?', Date.today.beginning_of_year).average('rating')
-      @average_overall = @books.average('rating')
+      @average_this_year = @books.where('end_date >= ?', Date.today.beginning_of_year).average('rating').round(1)
+      @average_overall = @books.average('rating').round(1)
     else
       flash[:notice] = "You need to log in first"
       redirect_to(root_path)
