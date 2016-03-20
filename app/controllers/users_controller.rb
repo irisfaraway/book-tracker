@@ -7,7 +7,8 @@ class UsersController < ApplicationController
   # GET /users
   # GET /users.json
   def index
-    @users = User.all
+    # Show admins first, then all users in alphabetical order
+    @users = User.all.order('admin DESC, name DESC')
   end
 
   # GET /users/1
