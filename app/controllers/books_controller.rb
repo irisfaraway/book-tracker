@@ -1,5 +1,6 @@
 class BooksController < ApplicationController
   before_action :set_book, only: [:show, :edit, :update, :destroy]
+  require 'googlebooks'
 
   # GET /books
   # GET /books.json
@@ -34,6 +35,7 @@ class BooksController < ApplicationController
   # GET /books/new
   def new
     @book = Book.new
+    search_google_books
   end
 
   # GET /books/1/edit
@@ -90,12 +92,18 @@ class BooksController < ApplicationController
       end
     end
 
+    # Search Google Books and return results
+    def search_google_books
+      @google_books_results = GoogleBooks.search('The Great Gatsby', {:country => "uk"})
+    end
+
     # Never trust parameters from the scary internet, only allow the white list through.
     def book_params
       params.require(:book).permit(:title,
                                     :author,
                                     :start_date,
                                     :end_date,
-                                    :rating)
+                                    :rating,
+                                    :query)
     end
 end

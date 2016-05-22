@@ -1,5 +1,30 @@
 <h1>New Book</h1>
+<p>You have two options:</p>
+<h2>Search for a book to add</h2>
 
+<% # Search for books %>
+<%= form_tag("/books/new", method: "get") do %>
+  <div class="small-12 medium-10 large-8">
+    <div class="field">
+      <%= label_tag(:query, "Search for:") %>
+      <%= text_field_tag(:query) %>
+    </div>
+    <div class="actions">
+      <%= submit_tag("Search") %>
+    </div>
+  </div>
+<% end %>
+
+<% # List the results %>
+<% unless @google_books_results.nil? %>
+  <ul>
+    <% @google_books_results.each do |result| %>
+      <li><%= result.title %></li>
+    <% end %>
+  </ul>
+<% end %>
+
+<h2>Fill it in manually</h2>
 <%= render 'form' %>
 
 <%= link_to 'Back to all my books', books_path, class: 'button radius info' %>
