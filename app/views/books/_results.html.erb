@@ -13,7 +13,8 @@
     <% @google_books_results.each do |result| %>
       <tr>
         <td><img src="<%= result.image_link %>" alt="Cover of <%= result.title %>"></td>
-        <td><%= result.title %></td>
+        <td><%= result.title %><br>
+          <small><a href="<%= result.info_link %>">View on Google Books</a></small></td>
         <td><%= result.authors %></td>
         <td><%= result.page_count %> pages</td>
         <td><%= link_to "Pick this one", new_book_path(:google_books_title => result.title, :google_books_author => result.authors) %></td>
