@@ -1,0 +1,11 @@
+<%= form_tag("/books/new", method: "get") do %>
+  <div class="small-12 medium-10 large-8">
+    <div class="field">
+      <%= label_tag(:google_books_query, "Search for title, author, etc:") %>
+      <%= text_field_tag(:google_books_query, params[:google_books_query]) %>
+    </div>
+    <div class="actions">
+      <%= submit_tag("Search") %>
+    </div>
+  </div>
+<% end %>

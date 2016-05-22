@@ -1,0 +1,25 @@
+<% unless @google_books_results.nil? %>
+  <h3>Results</h3>
+  <table>
+    <thead>
+      <tr>
+        <th>Cover</th>
+        <th>Title</th>
+        <th>Authors</th>
+        <th>Pages</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @google_books_results.each do |result| %>
+        <tr>
+          <td><img src="<%= result.image_link %>" alt="Cover of <%= result.title %>"></td>
+          <td><%= result.title %></td>
+          <td><%= result.authors %></td>
+          <td><%= result.page_count %> pages</td>
+          <td><a href="#" class="button radius success">Pick this one</a></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% end %>

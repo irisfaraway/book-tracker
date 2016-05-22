@@ -1,46 +1,8 @@
 <h1>New Book</h1>
 <p>You have two options:</p>
 <h2>Search for a book to add</h2>
-
-<% # Search for books %>
-<%= form_tag("/books/new", method: "get") do %>
-  <div class="small-12 medium-10 large-8">
-    <div class="field">
-      <%= label_tag(:google_books_query, "Search for title, author, etc:") %>
-      <%= text_field_tag(:google_books_query, params[:google_books_query]) %>
-    </div>
-    <div class="actions">
-      <%= submit_tag("Search") %>
-    </div>
-  </div>
-<% end %>
-
-<% # List the results %>
-<% unless @google_books_results.nil? %>
-  <h3>Results</h3>
-  <table>
-    <thead>
-      <tr>
-        <th>Cover</th>
-        <th>Title</th>
-        <th>Authors</th>
-        <th>Pages</th>
-        <th></th>
-      </tr>
-    </thead>
-    <tbody>
-      <% @google_books_results.each do |result| %>
-        <tr>
-          <td><img src="<%= result.image_link %>" alt="Cover of <%= result.title %>"></td>
-          <td><%= result.title %></td>
-          <td><%= result.authors %></td>
-          <td><%= result.page_count %> pages</td>
-          <td><a href="#" class="button radius success">Pick this one</a></td>
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
-<% end %>
+<%= render 'search' %>
+<%= render 'results' %>
 
 <h2>Fill it in manually</h2>
 <%= render 'form' %>
