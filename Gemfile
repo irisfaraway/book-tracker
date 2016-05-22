@@ -32,6 +32,9 @@ gem 'pg'
 # Authenticate through Facebook
 gem 'omniauth-facebook'
 
+# Get book info from Google Books
+gem 'googlebooks'
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
