@@ -103,7 +103,6 @@ class BooksController < ApplicationController
                                     :author,
                                     :start_date,
                                     :end_date,
-                                    :rating,
-                                    :google_books_query)
+                                    :rating)
     end
 end

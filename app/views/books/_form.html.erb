@@ -14,11 +14,19 @@
   <div class="small-12 medium-10 large-8">
     <div class="field">
       <%= f.label :title %>(required)<br>
-      <%= f.text_field :title %>
+      <% if @book.new_record? %>
+        <%= f.text_field :title, :value => params[:google_books_title] %>
+      <% else %>
+        <%= f.text_field :title %>
+      <% end %>
     </div>
     <div class="field">
       <%= f.label :author %>(required)<br>
-      <%= f.text_field :author %>
+      <% if @book.new_record? %>
+        <%= f.text_field :author, :value => params[:google_books_author] %>
+      <% else %>
+        <%= f.text_field :author %>
+      <% end %>
     </div>
     <div class="field">
       <%= f.label :start_date %>(required)<br>
