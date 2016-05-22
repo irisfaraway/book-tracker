@@ -94,7 +94,7 @@ class BooksController < ApplicationController
 
     # Search Google Books and return results
     def search_google_books
-      @google_books_results = GoogleBooks.search('My Brilliant Friend', {:country => "uk"})
+      @google_books_results = GoogleBooks.search(params[:google_books_query], {:country => "uk"})
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
@@ -104,6 +104,6 @@ class BooksController < ApplicationController
                                     :start_date,
                                     :end_date,
                                     :rating,
-                                    :query)
+                                    :google_books_query)
     end
 end
