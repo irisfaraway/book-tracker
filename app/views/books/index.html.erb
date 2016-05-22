@@ -9,7 +9,7 @@
       <% if @finished_this_year == 0 %>
         <p>You haven't finished anything yet this year.</p>
       <% else %>
-        <p>You've finished <%= @finished_this_year %> books in <%= Date.today.year %>.</p>
+        <p>You've finished <%= @finished_this_year %> books in <%= Date.today.year %>. That's <%= number_with_precision(@page_count_this_year, precision: 0, delimiter: ',') %> pages.</p></p>
         <p>It took you <%= Date.today.yday %> days, or one book every <%= @days_per_book %> days. At this rate, you'll read <%= @books_per_year %> books this year.</p>
       <% end %>
       <p><% if @in_progress > 1 %>
@@ -27,6 +27,9 @@
     <div class="panel">
       <h2>Overall</h2>
       <p>You've started reading <%= @books.count %> books and finished <%= @books.count('end_date') %> of them.</p>
+      <% unless @page_count_overall.nil? %>
+        <p>You've read <%= number_with_precision(@page_count_overall, precision: 0, delimiter: ',')%> pages in total.</p>
+      <% end %>
       <% unless @average_overall.nil? %>
         <p>Average book rating: <%= @average_overall %>/5</p>
       <% end %>

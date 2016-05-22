@@ -8,8 +8,13 @@ class BooksController < ApplicationController
     if logged_in?
       # List the user's books, starting with unfinished ones and then most recently finished
       @books = Book.where(user_id: current_user.id).order('end_date IS NOT NULL, end_date DESC, start_date DESC')
+      
       # Book stats for dashboard
+
+      # Count how many books were finished this year
       @finished_this_year = @books.where('end_date > ?', Date.today.beginning_of_year).count
+
+      # Get the average time it took to read each book
       if @finished_this_year.nonzero?
         # Gets number of current day in entire year, divides it by number of books with end dates this year
         @days_per_book = Date.today.yday / @finished_this_year
@@ -18,9 +23,26 @@ class BooksController < ApplicationController
       else
         @days_per_book = 0
       end
+
+      # Count how many books are still being read
       @in_progress = @books.where('end_date IS NULL').count
-      @average_this_year = @books.where('end_date >= ?', Date.today.beginning_of_year).average('rating').round(1)
-      @average_overall = @books.average('rating').round(1)
+
+      # Average book ratings
+      unless @books.where('rating IS NOT NULL AND end_date >= ?', Date.today.beginning_of_year).empty?
+        @average_this_year = @books.where('end_date >= ?', Date.today.beginning_of_year).average('rating').round(1)
+      else
+        @average_this_year = 0
+      end
+      unless @books.where('rating IS NOT NULL').empty?
+        @average_overall = @books.average('rating').round(1)
+      else
+        @average_overall = 0
+      end
+
+      # Page count stats
+      @page_count_this_year = @books.where('end_date >=? AND number_of_pages IS NOT NULL', Date.today.beginning_of_year).sum('number_of_pages')
+      @page_count_overall = @books.where('end_date IS NOT NULL AND number_of_pages IS NOT NULL').sum('number_of_pages')
+
     else
       flash[:notice] = "You need to log in first"
       redirect_to(root_path)
