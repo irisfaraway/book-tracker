@@ -56,7 +56,7 @@
           <tr>
             <td><%= book.title %></td>
             <td><%= book.author %></td>
-            <td><%= book.number_of_pages %></td>
+            <td><%= number_with_precision(book.number_of_pages, precision: 0, delimiter: ',') %></td>
             <td><%= book.start_date.to_formatted_s(:dmy) %></td>
             <td><% if book.end_date.nil? %>
                   -
