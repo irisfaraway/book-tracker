@@ -19,7 +19,7 @@
               <small><a href="<%= result.info_link %>">View on Google Books</a></small></td>
             <td><%= result.authors %></td>
             <td><%= result.page_count %> pages</td>
-            <td><%= link_to "Choose book", new_book_path(:google_books_title => result.title, :google_books_author => result.authors), class: 'button radius success' %></td>
+            <td><%= link_to "Choose book", new_book_path(:google_books_title => result.title, :google_books_author => result.authors, :google_books_number_of_pages => result.page_count), class: 'button radius success' %></td>
           </tr>
         <% end %>
       </tbody>

@@ -30,6 +30,14 @@
         <% end %>
       </div>
       <div class="field">
+        <%= f.label :number_of_pages %>(required)<br>
+        <% if @book.new_record? %>
+          <%= f.text_field :number_of_pages, :value => params[:google_books_number_of_pages] %>
+        <% else %>
+          <%= f.text_field :number_of_pages %>
+        <% end %>
+      </div>
+      <div class="field">
         <%= f.label :start_date %>(required)<br>
         <%= f.date_select :start_date %>
       </div>

@@ -40,6 +40,7 @@
         <tr>
           <th>Title</th>
           <th>Author</th>
+          <th>Number of pages</th>
           <th>Start</th>
           <th>End</th>
           <th>Rating</th>
@@ -52,6 +53,7 @@
           <tr>
             <td><%= book.title %></td>
             <td><%= book.author %></td>
+            <td><%= book.number_of_pages %></td>
             <td><%= book.start_date.to_formatted_s(:dmy) %></td>
             <td><% if book.end_date.nil? %>
                   -
