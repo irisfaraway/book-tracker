@@ -1,10 +1,19 @@
 <h1>New Book</h1>
-<p>You have two options:</p>
-<h2>Search for a book to add</h2>
-<%= render 'search' %>
-<%= render 'results' %>
 
-<h2>Fill it in manually</h2>
-<%= render 'form' %>
+<% unless params[:google_books_title].present? %>
+  <%= render 'search' %>
+<% end %>
+
+<% unless params[:google_books_query].present? || params[:google_books_title].present? %>
+  <p>If you don't want to search for a book, you can enter the book details yourself:</p>
+<% end %>
+
+<% if params[:google_books_query].present? %>
+  <%= render 'results' %>
+<% end %>
+
+<% unless params[:google_books_query].present? %>
+  <%= render 'form' %>
+<% end %>
 
 <%= link_to 'Back to all my books', books_path, class: 'button radius info' %>

@@ -1,25 +1,23 @@
-<% unless @google_books_results.nil? %>
-  <h3>Results</h3>
-  <table>
-    <thead>
+<h3>Results</h3>
+<table>
+  <thead>
+    <tr>
+      <th>Cover</th>
+      <th>Title</th>
+      <th>Authors</th>
+      <th>Pages</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @google_books_results.each do |result| %>
       <tr>
-        <th>Cover</th>
-        <th>Title</th>
-        <th>Authors</th>
-        <th>Pages</th>
-        <th></th>
+        <td><img src="<%= result.image_link %>" alt="Cover of <%= result.title %>"></td>
+        <td><%= result.title %></td>
+        <td><%= result.authors %></td>
+        <td><%= result.page_count %> pages</td>
+        <td><%= link_to "Pick this one", new_book_path(:google_books_title => result.title, :google_books_author => result.authors) %></td>
       </tr>
-    </thead>
-    <tbody>
-      <% @google_books_results.each do |result| %>
-        <tr>
-          <td><img src="<%= result.image_link %>" alt="Cover of <%= result.title %>"></td>
-          <td><%= result.title %></td>
-          <td><%= result.authors %></td>
-          <td><%= result.page_count %> pages</td>
-          <td><%= link_to "Pick this one", new_book_path(:google_books_title => result.title, :google_books_author => result.authors) %></td>
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
-<% end %>
+    <% end %>
+  </tbody>
+</table>
