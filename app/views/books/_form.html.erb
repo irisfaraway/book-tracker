@@ -1,47 +1,58 @@
 <%= form_for(@book) do |f| %>
   <% if @book.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@book.errors.count, "error") %> prohibited this book from being saved:</h2>
-
-      <ul>
-      <% @book.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
+    <div class="row">
+      <div class="small-12 medium-10 large-8" id="error_explanation">
+        <h2><%= pluralize(@book.errors.count, "error") %> prohibited this book from being saved:</h2>
+        <ul>
+        <% @book.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+        </ul>
+      </div>
     </div>
   <% end %>
-
-  <div class="small-12 medium-10 large-8">
-    <div class="field">
-      <%= f.label :title %>(required)<br>
-      <% if @book.new_record? %>
-        <%= f.text_field :title, :value => params[:google_books_title] %>
-      <% else %>
-        <%= f.text_field :title %>
-      <% end %>
+  <div class="row">
+    <div class="small-12 medium-10 large-8">
+      <div class="field">
+        <%= f.label :title %>(required)<br>
+        <% if @book.new_record? %>
+          <%= f.text_field :title, :value => params[:google_books_title] %>
+        <% else %>
+          <%= f.text_field :title %>
+        <% end %>
+      </div>
+      <div class="field">
+        <%= f.label :author %>(required)<br>
+        <% if @book.new_record? %>
+          <%= f.text_field :author, :value => params[:google_books_author] %>
+        <% else %>
+          <%= f.text_field :author %>
+        <% end %>
+      </div>
+      <div class="field">
+        <%= f.label :start_date %>(required)<br>
+        <%= f.date_select :start_date %>
+      </div>
+      <div class="field">
+        <%= f.label :end_date %><br>
+        <%= f.date_select :end_date, {:include_blank => true, :default => nil} %>
+      </div>
+      <div class="field">
+        <%= f.label :rating %><br>
+        <%= f.number_field :rating %>
+      </div>
     </div>
-    <div class="field">
-      <%= f.label :author %>(required)<br>
-      <% if @book.new_record? %>
-        <%= f.text_field :author, :value => params[:google_books_author] %>
-      <% else %>
-        <%= f.text_field :author %>
-      <% end %>
-    </div>
-    <div class="field">
-      <%= f.label :start_date %>(required)<br>
-      <%= f.date_select :start_date %>
-    </div>
-    <div class="field">
-      <%= f.label :end_date %><br>
-      <%= f.date_select :end_date, {:include_blank => true, :default => nil} %>
-    </div>
-    <div class="field">
-      <%= f.label :rating %><br>
-      <%= f.number_field :rating %>
-    </div>
-    <div class="actions">
-      <%= f.submit %>
+  </div>
+  <div class="row">
+    <div class="small-12 medium-10 large-8">
+      <div class="row actions">
+        <div class="small-12 medium-6 column">
+          <%= submit_tag "Save", class: 'button radius success expand' %>
+        </div>
+        <div class="small-12 medium-6 column">
+          <%= link_to "Back to my books", books_path, class: 'button radius warning expand' %>
+        </div>
+      </div>
     </div>
   </div>
 <% end %>

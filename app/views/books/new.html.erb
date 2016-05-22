@@ -1,11 +1,19 @@
-<h1>New Book</h1>
+<div class="row">
+  <div class="small-12">
+    <h1>Add a new book</h1>
+  </div>
+</div>
 
 <% unless params[:google_books_title].present? %>
   <%= render 'search' %>
 <% end %>
 
 <% unless params[:google_books_query].present? || params[:google_books_title].present? %>
-  <p>If you don't want to search for a book, you can enter the book details yourself:</p>
+  <div class="row">
+    <div class="small-12">
+      <p>If you don't want to search for a book, you can enter the book details yourself:</p>
+    </div>
+  </div>
 <% end %>
 
 <% if params[:google_books_query].present? %>
@@ -15,5 +23,3 @@
 <% unless params[:google_books_query].present? %>
   <%= render 'form' %>
 <% end %>
-
-<%= link_to 'Back to all my books', books_path, class: 'button radius info' %>

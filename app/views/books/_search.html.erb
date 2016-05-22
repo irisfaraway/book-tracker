@@ -1,12 +1,24 @@
-<%= form_tag("/books/new", method: "get") do %>
-  <div class="small-12 medium-10 large-8">
-    <div class="field">
-      <%= label_tag(:google_books_query, "Search for title, author, etc:") %>
-      <%= text_field_tag(:google_books_query, params[:google_books_query]) %>
-    </div>
-    <div class="actions">
-      <%= submit_tag("Search") %>
-      <img src="https://books.google.com/googlebooks/images/poweredby.png" alt="Powered by Google Books">
-    </div>
+<div class="row">
+  <div class="small-12">
+    <%= form_tag("/books/new", method: "get") do %>
+      <div class="panel">
+        <div class="row">
+          <div class="columns small-12">
+            <%= label_tag(:google_books_query, "Search for title, author, etc.") %>
+          </div>
+        </div>
+        <div class="row">
+          <div class="field columns small-12 medium-8">
+            <%= text_field_tag(:google_books_query, params[:google_books_query]) %>
+          </div>
+          <div class="columns small-12 medium-2">
+              <%= submit_tag "Search", class: 'button success radius tiny' %>
+          </div>
+          <div class="columns small-12 medium-2">
+            <img src="https://books.google.com/googlebooks/images/poweredby.png" alt="Powered by Google Books">
+          </div>
+        </div>
+      </div>
+    <% end %>
   </div>
-<% end %>
+</div>
