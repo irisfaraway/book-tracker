@@ -107,12 +107,12 @@ class BooksController < ApplicationController
 
   # Average book ratings this year and overall
   def calculate_average_book_ratings
-    @average_this_year = if @books.where('rating IS NOT NULL AND start_date >= ?', Time.zone.today.beginning_of_year).empty?
+    @average_this_year = if @books.rated_this_year.empty?
                            0
                          else
-                           @books.where('start_date >= ?', Time.zone.today.beginning_of_year).average('rating').round(1)
+                           @books.started_this_year.average('rating').round(1)
                          end
-    @average_overall = if @books.where('rating IS NOT NULL').empty?
+    @average_overall = if @books.rated.empty?
                          0
                        else
                          @books.average('rating').round(1)
@@ -121,8 +121,8 @@ class BooksController < ApplicationController
 
   # Count number of pages read this year and overall
   def count_pages_read
-    @page_count_this_year = @books.where('end_date >=? AND number_of_pages IS NOT NULL', Date.today.beginning_of_year).sum('number_of_pages')
-    @page_count_overall = @books.where('end_date IS NOT NULL AND number_of_pages IS NOT NULL').sum('number_of_pages')
+    @page_count_this_year = @books.finished_this_year_and_has_pages.sum('number_of_pages')
+    @page_count_overall = @books.finished_and_has_pages.sum('number_of_pages')
   end
 
   # Search Google Books and return results

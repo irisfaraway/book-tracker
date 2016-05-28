@@ -2,6 +2,27 @@
 class Book < ActiveRecord::Base
   belongs_to :user
 
+  # Queries for the dashboard
+  scope :rated, lambda {
+    where('rating IS NOT NULL')
+  }
+
+  scope :rated_this_year, lambda {
+    where('rating IS NOT NULL AND start_date >= ?', Time.zone.today.beginning_of_year)
+  }
+
+  scope :started_this_year, lambda {
+    where('start_date >= ?', Time.zone.today.beginning_of_year)
+  }
+
+  scope :finished_and_has_pages, lambda {
+    where('end_date IS NOT NULL AND number_of_pages IS NOT NULL')
+  }
+
+  scope :finished_this_year_and_has_pages, lambda {
+    where('end_date >=? AND number_of_pages IS NOT NULL', Time.zone.today.beginning_of_year)
+  }
+
   # Require a title, author and start date
   validates :title, :author, :start_date, presence: true
 
