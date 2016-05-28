@@ -37,7 +37,7 @@ describe Book do
   it 'is invalid without a start date' do
     book_params.delete :start_date
     book.wont_be :valid?
-    book.errors[:start].must_be :present?
+    book.errors[:start_date].must_be :present?
   end
 
 end
