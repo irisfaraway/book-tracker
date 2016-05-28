@@ -8,7 +8,7 @@
   <%= render 'search' %>
 <% end %>
 
-<% unless params[:google_books_query].present? || params[:google_books_title].present? %>
+<% if params[:google_books_query].blank? && params[:google_books_title].blank? %>
   <div class="row">
     <div class="small-12">
       <p>If you don't want to search for a book, you can enter the book details yourself:</p>
@@ -18,8 +18,6 @@
 
 <% if params[:google_books_query].present? %>
   <%= render 'results' %>
-<% end %>
-
-<% unless params[:google_books_query].present? %>
+  <% else %>
   <%= render 'form' %>
 <% end %>
