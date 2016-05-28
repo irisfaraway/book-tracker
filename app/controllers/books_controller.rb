@@ -107,10 +107,10 @@ class BooksController < ApplicationController
 
   # Average book ratings this year and overall
   def calculate_average_book_ratings
-    @average_this_year = if @books.where('rating IS NOT NULL AND end_date >= ?', Time.zone.today.beginning_of_year).empty?
+    @average_this_year = if @books.where('rating IS NOT NULL AND start_date >= ?', Time.zone.today.beginning_of_year).empty?
                            0
                          else
-                           @books.where('end_date >= ?', Time.zone.today.beginning_of_year).average('rating').round(1)
+                           @books.where('start_date >= ?', Time.zone.today.beginning_of_year).average('rating').round(1)
                          end
     @average_overall = if @books.where('rating IS NOT NULL').empty?
                          0
