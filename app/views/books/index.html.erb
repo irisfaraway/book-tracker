@@ -5,23 +5,23 @@
 </div>
 <div class="row">
   <div class="small-12 medium-12 large-6 columns">
-      <h2>This year</h2>
-      <% if @finished_this_year == 0 %>
-        <p>You haven't finished anything yet this year.</p>
+    <h2>This year</h2>
+    <% if @finished_this_year == 0 %>
+      <p>You haven't finished anything yet this year.</p>
+    <% else %>
+      <p>You've finished <%= @finished_this_year %> books in <%= Date.today.year %>. That's <%= number_with_precision(@page_count_this_year, precision: 0, delimiter: ',') %> pages.</p></p>
+      <p>It took you <%= Date.today.yday %> days, or one book every <%= @days_per_book %> days. At this rate, you'll read <%= @books_per_year %> books this year.</p>
+    <% end %>
+    <p><% if @in_progress > 1 %>
+        You're reading <%= @in_progress %> books right now &mdash; better finish some up!
+      <% elsif @in_progress < 1 %>
+        You aren't reading anything right now. Go start something!
       <% else %>
-        <p>You've finished <%= @finished_this_year %> books in <%= Date.today.year %>. That's <%= number_with_precision(@page_count_this_year, precision: 0, delimiter: ',') %> pages.</p></p>
-        <p>It took you <%= Date.today.yday %> days, or one book every <%= @days_per_book %> days. At this rate, you'll read <%= @books_per_year %> books this year.</p>
-      <% end %>
-      <p><% if @in_progress > 1 %>
-          You're reading <%= @in_progress %> books right now &mdash; better finish some up!
-        <% elsif @in_progress < 1 %>
-          You aren't reading anything right now. Go start something!
-        <% else %>
-          You're reading <%= @in_progress %> book right now.
-      <% end %></p>
-      <% unless @average_this_year.nil? %>
-        <p>Average book rating: <%= @average_this_year %>/5</p>
-      <% end %>
+        You're reading <%= @in_progress %> book right now.
+    <% end %></p>
+    <% unless @average_this_year.nil? %>
+      <p>Average book rating: <%= @average_this_year %>/5</p>
+    <% end %>
   </div>
   <div class="small-12 medium-12 large-6 columns">
     <div class="panel">
@@ -34,6 +34,11 @@
         <p>Average book rating: <%= @average_overall %>/5</p>
       <% end %>
     </div>
+  </div>
+</div>
+<div class="row">
+  <div class="small-12 columns">
+    <%= link_to 'Add a new book', new_book_path, class: 'button radius success' %>
   </div>
 </div>
 <div class="row">
@@ -74,10 +79,5 @@
         <% end %>
       </tbody>
     </table>
-  </div>
-</div>
-<div class="row">
-  <div class="small-12 columns">
-    <%= link_to 'Add a new book', new_book_path, class: 'button radius success' %>
   </div>
 </div>
