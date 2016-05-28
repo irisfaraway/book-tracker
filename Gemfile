@@ -49,6 +49,9 @@ group :development do
 
   # Set up layouts
   gem 'rails_layout'
+
+  # Use Rubocop for linting
+  gem 'rubocop'
 end
 
 group :test do
