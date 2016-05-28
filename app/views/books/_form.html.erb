@@ -16,7 +16,7 @@
       <div class="field">
         <%= f.label :title %>(required)<br>
         <% if @book.new_record? %>
-          <%= f.text_field :title, :value => params[:google_books_title] %>
+          <%= f.text_field :title, :value => sanitize(params[:google_books_title]) %>
         <% else %>
           <%= f.text_field :title %>
         <% end %>
@@ -24,7 +24,7 @@
       <div class="field">
         <%= f.label :author %>(required)<br>
         <% if @book.new_record? %>
-          <%= f.text_field :author, :value => params[:google_books_author] %>
+          <%= f.text_field :author, :value => sanitize(params[:google_books_author]) %>
         <% else %>
           <%= f.text_field :author %>
         <% end %>
@@ -32,7 +32,7 @@
       <div class="field">
         <%= f.label :number_of_pages %><br>
         <% if @book.new_record? %>
-          <%= f.text_field :number_of_pages, :value => params[:google_books_number_of_pages] %>
+          <%= f.text_field :number_of_pages, :value => sanitize(params[:google_books_number_of_pages]) %>
         <% else %>
           <%= f.text_field :number_of_pages %>
         <% end %>
