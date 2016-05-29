@@ -9,3 +9,9 @@ class ActiveSupport::TestCase
 
   # Add more helper methods to be used by all tests here...
 end
+
+# Use the default minitest reporters
+require 'minitest/reporters'
+MiniTest::Reporters.use! [
+  MiniTest::Reporters::DefaultReporter.new
+]
