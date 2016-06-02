@@ -3,6 +3,8 @@ require 'test_helper'
 class BooksControllerTest < ActionController::TestCase
   setup do
     @book = books(:one)
+    @user = users(:one)
+    session[:user_id] = @user.id
   end
 
   test "should get index" do
@@ -18,7 +20,14 @@ class BooksControllerTest < ActionController::TestCase
 
   test "should create book" do
     assert_difference('Book.count') do
-      post :create, book: { author: @book.author, end_date: @book.end_date, rating: @book.rating, start_date: @book.start_date, title: @book.title }
+      post :create, book: { user_id: @book.user_id,
+                            title: @book.title,
+                            author: @book.author,
+                            start_date: @book.start_date,
+                            end_date: @book.end_date,
+                            rating: @book.rating,
+                            number_of_pages: @book.number_of_pages
+                          }
     end
 
     assert_redirected_to books_path
@@ -35,7 +44,14 @@ class BooksControllerTest < ActionController::TestCase
   end
 
   test "should update book" do
-    patch :update, id: @book, book: { author: @book.author, end_date: @book.end_date, rating: @book.rating, start_date: @book.start_date, title: @book.title }
+    patch :update, id: @book, book: { user_id: @book.user_id,
+                                      title: @book.title,
+                                      author: @book.author,
+                                      start_date: @book.start_date,
+                                      end_date: @book.end_date,
+                                      rating: @book.rating,
+                                      number_of_pages: @book.number_of_pages
+                                    }
     assert_redirected_to books_path
   end
 
