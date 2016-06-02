@@ -2,9 +2,9 @@ require 'test_helper'
 
 class BooksControllerTest < ActionController::TestCase
   setup do
-    @book = books(:one)
-    @user = users(:admin_user)
-    session[:user_id] = @user.id
+    @finished_book = books(:finished_book)
+    @admin_user = users(:admin_user)
+    session[:user_id] = @admin_user.id
   end
 
   test "should get index" do
@@ -20,13 +20,13 @@ class BooksControllerTest < ActionController::TestCase
 
   test "should create book" do
     assert_difference('Book.count') do
-      post :create, book: { user_id: @book.user_id,
-                            title: @book.title,
-                            author: @book.author,
-                            start_date: @book.start_date,
-                            end_date: @book.end_date,
-                            rating: @book.rating,
-                            number_of_pages: @book.number_of_pages
+      post :create, id: @finished_book, book: { user_id: @admin_user.id,
+                            title: @finished_book.title,
+                            author: @finished_book.author,
+                            start_date: @finished_book.start_date,
+                            end_date: @finished_book.end_date,
+                            rating: @finished_book.rating,
+                            number_of_pages: @finished_book.number_of_pages
                           }
     end
 
@@ -34,30 +34,30 @@ class BooksControllerTest < ActionController::TestCase
   end
 
   test "should show book" do
-    get :show, id: @book
+    get :show, id: @finished_book
     assert_response :success
   end
 
   test "should get edit" do
-    get :edit, id: @book
+    get :edit, id: @finished_book
     assert_response :success
   end
 
   test "should update book" do
-    patch :update, id: @book, book: { user_id: @book.user_id,
-                                      title: @book.title,
-                                      author: @book.author,
-                                      start_date: @book.start_date,
-                                      end_date: @book.end_date,
-                                      rating: @book.rating,
-                                      number_of_pages: @book.number_of_pages
-                                    }
+    patch :update, id: @finished_book, book: { user_id: @finished_book.user_id,
+                                               title: @finished_book.title,
+                                               author: @finished_book.author,
+                                               start_date: @finished_book.start_date,
+                                               end_date: @finished_book.end_date,
+                                               rating: @finished_book.rating,
+                                               number_of_pages: @finished_book.number_of_pages
+                                             }
     assert_redirected_to books_path
   end
 
   test "should destroy book" do
     assert_difference('Book.count', -1) do
-      delete :destroy, id: @book
+      delete :destroy, id: @finished_book
     end
 
     assert_redirected_to books_path
