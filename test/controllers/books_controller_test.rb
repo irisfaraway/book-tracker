@@ -3,7 +3,7 @@ require 'test_helper'
 class BooksControllerTest < ActionController::TestCase
   setup do
     @book = books(:one)
-    @user = users(:one)
+    @user = users(:admin_user)
     session[:user_id] = @user.id
   end
 
