@@ -1,23 +1,33 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-finished_book:
+default_book: &default
+  start_date: 2011-01-01
+  end_date: 2011-01-02
+  rating: 3
+  user_id: 1
+  number_of_pages: 300
+
+create_book:
+  <<: *default
+  title: Revenge of the Lawn
+  author: Richard Brautigan
+
+show_book:
+  <<: *default
   title: My Brilliant Friend
   author: Elena Ferrante
-  start_date: 2015-03-13
-  end_date: 2015-05-20
-  rating: 5
-  number_of_pages: 336
-  user_id: 1
 
-unfinished_book:
+edit_book:
+  <<: *default
   title: The Year of the Flood
   author: Margaret Atwood
-  start_date: 2016-01-04
-  number_of_pages: 448
-  user_id: 1
 
-delete_book:
+update_book:
+  <<: *default
   title: Uzumaki
   author: Junji Ito
-  start_date: 2014-12-25
-  user_id: 1
+
+destroy_book:
+  <<: *default
+  title: A Walk in the Woods
+  author: Bill Bryson
