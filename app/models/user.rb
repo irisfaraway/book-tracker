@@ -1,3 +1,4 @@
+# User object
 class User < ActiveRecord::Base
   has_many :books
 
@@ -7,7 +8,7 @@ class User < ActiveRecord::Base
       user.uid = auth.uid
       user.name = auth.info.name
       user.token = auth.credentials.token
-      user.expires_at = Time.at(auth.credentials.expires_at)
+      user.expires_at = Time.zone.at(auth.credentials.expires_at)
       user.save!
     end
   end

@@ -1,3 +1,4 @@
+# Logging in and logging out
 class SessionsController < ApplicationController
   # Logs the user in or sets up their account
   def create

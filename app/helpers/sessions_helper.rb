@@ -1,3 +1,4 @@
+# Manage user sessions
 module SessionsHelper
   # Returns the user who is currently logged in
   def current_user

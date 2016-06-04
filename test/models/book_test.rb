@@ -6,16 +6,14 @@ class BookTest < ActiveSupport::TestCase
   # end
 end
 
-
 describe Book do
-
-  let(:book_params) { {
-    title: 'My Brilliant Friend',
-    author: 'Elena Ferrante',
-    start_date: '2015-01-01',
-    end_date: '2016-01-01',
-    rating: '5'
-  } }
+  let(:book_params) do
+    { title: 'My Brilliant Friend',
+      author: 'Elena Ferrante',
+      start_date: '2015-01-01',
+      end_date: '2016-01-01',
+      rating: '5' }
+  end
   let(:book) { Book.new book_params }
 
   it 'is valid when created with valid parameters' do
@@ -39,5 +37,4 @@ describe Book do
     book.wont_be :valid?
     book.errors[:start_date].must_be :present?
   end
-
 end
