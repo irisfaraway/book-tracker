@@ -4,7 +4,7 @@ default_book: &default
   start_date: 2011-01-01
   end_date: 2011-01-02
   rating: 3
-  user_id: 1
+  user: admin_user
   number_of_pages: 300
 
 create_book:

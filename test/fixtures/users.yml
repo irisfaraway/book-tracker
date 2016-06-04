@@ -1,7 +1,6 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 admin_user:
-  id: 1
   provider: facebook
   uid: 1111
   name: George Spiggott
@@ -10,7 +9,6 @@ admin_user:
   admin: true
 
 create_user:
-  id: 2
   provider: facebook
   uid: 2222
   name: Stanley Moon
@@ -19,7 +17,6 @@ create_user:
   admin: true
 
 show_user:
-  id: 3
   provider: facebook
   uid: 3333
   name: Margaret
@@ -28,7 +25,6 @@ show_user:
   admin: true
 
 edit_user:
-  id: 4
   provider: facebook
   uid: 4444
   name: Drimble Wedge
@@ -37,7 +33,6 @@ edit_user:
   admin: true
 
 update_user:
-  id: 5
   provider: facebook
   uid: 5555
   name: Randolph
@@ -46,7 +41,6 @@ update_user:
   admin: true
 
 destroy_user:
-  id: 6
   provider: facebook
   uid: 6666
   name: Sister Phoebe
