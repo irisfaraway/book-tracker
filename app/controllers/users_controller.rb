@@ -68,35 +68,34 @@ class UsersController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_user
-      @user = User.find(params[:id])
-      redirect_to(root_url) unless @user == current_user
-    end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def user_params
-      params.fetch(:user, {})
-      params.require(:user).permit(:provider,
-                                    :uid,
-                                    :name,
-                                    :token,
-                                    :expires_at)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_user
+    @user = User.find(params[:id])
+    redirect_to(root_url) unless @user == current_user
+  end
 
-    # Confirms the user is logged in
-    def logged_in_user
-      unless logged_in?
-        flash[:notice] = "You need to log in first"
-        redirect_to(root_url)
-      end
-    end
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def user_params
+    params.fetch(:user, {})
+    params.require(:user).permit(:provider,
+                                 :uid,
+                                 :name,
+                                 :token,
+                                 :expires_at)
+  end
 
-    # Confirms the user is an admin
-    def admin_user
-      unless current_user.admin?
-        flash[:warning] = "Only admins can do that!"
-        redirect_to(root_url)
-      end
-    end
+  # Confirms the user is logged in
+  def logged_in_user
+    return if logged_in?
+    flash[:notice] = 'You need to log in first'
+    redirect_to(root_url)
+  end
+
+  # Confirms the user is an admin
+  def admin_user
+    return if current_user.admin?
+    flash[:warning] = 'Only admins can do that!'
+    redirect_to(root_url)
+  end
 end

@@ -15,3 +15,11 @@ normal_user:
   token: sgkhdfgiousehrgnjfg
   expires_at: 2020-03-14 22:14:10
   admin: false
+
+delete_user:
+  provider: facebook
+  uid: 5930
+  name: Sister Phoebe
+  token: fiandskafauirgheiuh
+  expires_at: 2020-03-14 22:14:10
+  admin: false
