@@ -3,26 +3,53 @@
 admin_user:
   id: 1
   provider: facebook
-  uid: 1234
+  uid: 1111
   name: George Spiggott
-  token: jkfnkdnkaoeurksdhfk
+  token: abc
   expires_at: 2020-03-14 22:14:10
   admin: true
 
-normal_user:
+create_user:
   id: 2
   provider: facebook
-  uid: 9876
+  uid: 2222
   name: Stanley Moon
-  token: sgkhdfgiousehrgnjfg
-  expires_at: 2020-03-14 22:14:10
-  admin: false
+  token: def
+  expires_at: 2100-01-01
+  admin: true
 
-delete_user:
+show_user:
   id: 3
   provider: facebook
-  uid: 5930
+  uid: 3333
+  name: Margaret
+  token: ghi
+  expires_at: 2100-01-01
+  admin: true
+
+edit_user:
+  id: 4
+  provider: facebook
+  uid: 4444
+  name: Drimble Wedge
+  token: jkl
+  expires_at: 2100-01-01
+  admin: true
+
+update_user:
+  id: 5
+  provider: facebook
+  uid: 5555
+  name: Randolph
+  token: mno
+  expires_at: 2100-01-01
+  admin: true
+
+destroy_user:
+  id: 6
+  provider: facebook
+  uid: 6666
   name: Sister Phoebe
-  token: fiandskafauirgheiuh
-  expires_at: 2020-03-14 22:14:10
-  admin: false
+  token: pqr
+  expires_at: 2100-01-01
+  admin: true
