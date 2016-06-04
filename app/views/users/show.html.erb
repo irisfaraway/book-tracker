@@ -25,6 +25,19 @@
         <strong>Admin:</strong>
         <%= @user.admin %>
       </p>
+
+      <p>
+        <strong>Books:</strong>
+        <%= @user.books.count %>
+      </p>
+
+      <% unless @user.books.empty? %>
+        <ul>
+          <% @user.books.each do |book| %>
+            <li><%= book.title %></li>
+          <% end %>
+        </ul>
+      <% end %>
     </div>
   </div>
   <div class="row">
