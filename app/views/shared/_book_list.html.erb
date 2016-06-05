@@ -1,0 +1,42 @@
+<% unless @books.empty? %>
+  <div class="row">
+    <div class="small-12 columns">
+      <table>
+        <thead>
+          <tr>
+            <th>Title</th>
+            <th>Author</th>
+            <th>Number of pages</th>
+            <th>Start</th>
+            <th>End</th>
+            <th>Rating</th>
+            <th colspan="2"></th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <% @books.each do |book| %>
+            <tr>
+              <td><%= book.title %></td>
+              <td><%= book.author %></td>
+              <td><%= number_with_precision(book.number_of_pages, precision: 0, delimiter: ',') %></td>
+              <td><%= book.start_date.to_formatted_s(:dmy) %></td>
+              <td><% if book.end_date.nil? %>
+                    -
+                  <% else %>
+                    <%= book.end_date.to_formatted_s(:dmy) %>
+                  <% end %></td>
+              <td><% if book.rating.nil? %>
+                    -
+                  <% else %>
+                    <%= book.rating %>/5
+                  <%end %></td>
+              <td><%= link_to 'Edit', edit_book_path(book), class: 'button radius tiny info' %></td>
+              <td><%= link_to 'Delete', book, method: :delete, data: { confirm: 'Are you sure?' }, class: 'button radius tiny alert' %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+<% end %>

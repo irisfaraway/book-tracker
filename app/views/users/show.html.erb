@@ -3,47 +3,41 @@
     <h1><%= @user.name %></h1>
   </div>
 </div>
-<% if current_user.admin? %>
-  <div class="row">
-    <div class="small-12 columns">
-      <p>
-        <strong>Provider:</strong>
-        <%= @user.provider %>
-      </p>
 
-      <p>
-        <strong>Uid:</strong>
-        <%= @user.uid %>
-      </p>
+<div class="row">
+  <div class="small-12 columns">
+    <p>
+      <strong>Provider:</strong>
+      <%= @user.provider %>
+    </p>
 
-      <p>
-        <strong>Expires at:</strong>
-        <%= @user.expires_at %>
-      </p>
+    <p>
+      <strong>Uid:</strong>
+      <%= @user.uid %>
+    </p>
 
-      <p>
-        <strong>Admin:</strong>
-        <%= @user.admin %>
-      </p>
+    <p>
+      <strong>Expires at:</strong>
+      <%= @user.expires_at %>
+    </p>
 
-      <p>
-        <strong>Books:</strong>
-        <%= @user.books.count %>
-      </p>
+    <p>
+      <strong>Admin:</strong>
+      <%= @user.admin %>
+    </p>
 
-      <% unless @user.books.empty? %>
-        <ul>
-          <% @user.books.each do |book| %>
-            <li><%= book.title %></li>
-          <% end %>
-        </ul>
-      <% end %>
-    </div>
+    <p>
+      <strong>Books:</strong>
+      <%= @user.books.count %>
+    </p>
   </div>
-  <div class="row">
-    <div class="small-12 columns">
-      <%= link_to 'Edit user', edit_user_path(@user), class: 'button radius info' %> 
-      <%= link_to 'Back to all users', users_path, class: 'button radius info' %>
-    </div>
+</div>
+
+<%= render 'shared/book_list' %>
+
+<div class="row">
+  <div class="small-12 columns">
+    <%= link_to 'Edit user', edit_user_path(@user), class: 'button radius info' %> 
+    <%= link_to 'Back to all users', users_path, class: 'button radius info' %>
   </div>
-<% end %>
+</div>
