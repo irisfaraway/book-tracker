@@ -1,6 +1,7 @@
 class BooksController < ApplicationController
-  before_action :set_book, only: [:show, :edit, :update, :destroy]
   require 'googlebooks'
+  before_action :set_book, only: [:show, :edit, :update, :destroy]
+  before_action :check_editing_permissions, only: [:show, :edit, :update, :destroy]
 
   # GET /books
   # GET /books.json
@@ -78,7 +79,11 @@ class BooksController < ApplicationController
   # Use callbacks to share common setup or constraints between actions
   def set_book
     @book = Book.find(params[:id])
-    unless @book.user.id == current_user.id
+  end
+
+  # Check if the user is allowed to view, edit or delete a book
+  def check_editing_permissions
+    unless @book.user.id == current_user.id || current_user.admin?
       flash[:warning] = "You can't edit someone else's book"
       redirect_to(books_path)
     end
@@ -88,7 +93,6 @@ class BooksController < ApplicationController
   def count_finished_and_in_progress_books
     # Count how many books were finished this year
     @finished_this_year = @books.where('end_date > ?', Time.zone.today.beginning_of_year).count
-
     # Count how many books are still being read
     @in_progress = @books.where('end_date IS NULL').count
   end
