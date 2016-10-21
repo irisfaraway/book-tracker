@@ -1,22 +1,18 @@
 class BooksController < ApplicationController
   require 'googlebooks'
+  before_action :check_if_logged_in
   before_action :set_book, only: [:show, :edit, :update, :destroy]
   before_action :check_editing_permissions, only: [:show, :edit, :update, :destroy]
 
   # GET /books
   # GET /books.json
   def index
-    if logged_in?
-      # List the user's books, starting with unfinished ones and then most recently finished
-      @books = Book.where(user_id: current_user.id).order('end_date IS NOT NULL, end_date DESC, start_date DESC')
-      count_finished_and_in_progress_books
-      calculate_average_reading_time
-      calculate_average_book_ratings
-      count_pages_read
-    else
-      flash[:notice] = 'You need to log in first'
-      redirect_to(root_path)
-    end
+    # List the user's books, starting with unfinished ones and then most recently finished
+    @books = Book.where(user_id: current_user.id).order('end_date IS NOT NULL, end_date DESC, start_date DESC')
+    count_finished_and_in_progress_books
+    calculate_average_reading_time
+    calculate_average_book_ratings
+    count_pages_read
   end
 
   # GET /books/1
@@ -81,12 +77,18 @@ class BooksController < ApplicationController
     @book = Book.find(params[:id])
   end
 
+  # Check if the user is logged in and redirect them if not
+  def check_if_logged_in
+    return if logged_in?
+    flash[:notice] = 'You need to log in first'
+    redirect_to(root_path)
+  end
+
   # Check if the user is allowed to view, edit or delete a book
   def check_editing_permissions
-    unless @book.user.id == current_user.id || current_user.admin?
-      flash[:warning] = "You can't edit someone else's book"
-      redirect_to(books_path)
-    end
+    return if @book.user.id == current_user.id || current_user.admin?
+    flash[:warning] = "You can't edit someone else's book"
+    redirect_to(books_path)
   end
 
   # Calculate book stats for dashboard
