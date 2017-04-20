@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 ruby '2.3.0'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.2.6'
+gem 'rails', '4.2.8'
 # Use Foundation framework for prettiness
 gem 'foundation-rails', '~> 5.5'
 # Use SCSS for stylesheets
