@@ -29,8 +29,8 @@ gem 'date_validator'
 # Use Postgres
 gem 'pg'
 
-# Authenticate through Facebook
-gem 'omniauth-facebook'
+# Authenticate users
+gem 'omniauth-google-oauth2'
 
 # Get book info from Google Books
 gem 'googlebooks'
