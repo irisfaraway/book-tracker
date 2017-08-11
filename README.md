@@ -4,7 +4,7 @@ Tracking what books I've read, when I read them and how much I liked them.
 
 This is up and running at [iris-book-tracker.herokuapp.com](http://iris-book-tracker.herokuapp.com/)
 
-You can sign up and track books too. Authentication is through Facebook. You can fill in book data manually or search Google Books.
+You can sign up and track books too. Authentication is through Google. You can fill in book data manually or search Google Books.
 
 ## Backlog
 
